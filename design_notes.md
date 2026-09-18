@@ -16,6 +16,9 @@ Source: `notebooks/01_eda.ipynb`. `[§N]` points to the matching numbered sectio
   → FX join keys on `order_items.currency`. Custom test measures the divergence (baseline 114).
 - `orders.total_amount` != sum of `order_items`: 193/360 (53.6%); 79 of those even when currency matches. `[§10, §11]`
   → `fct_orders` exposes `header_total_usd`, `items_rollup_total_usd`, `has_revenue_discrepancy`.
+- `has_revenue_discrepancy` compares in USD, not native currency, so it differs from the 193 above: 116 true, 142 false, 195 null.
+  Null breaks down as 93 orders with no item, 55 with an invalid header currency, 47 where every item's currency is invalid
+  (`sum()` over an all-null group is null, not zero).
 - fx_rates: 2 dates (2024-06-01, 2024-09-15) covering 236 days of orders; 55 orders (12%) predate the first. `[§12, §13]`
   → forward-fill to 2024-06-01, `fx_rate_source` column.
 - GBP has no direct rate on 2024-09-15 → inverted via `base=USD`. Only such case; GBP is 4/453 orders. `[§14]`
