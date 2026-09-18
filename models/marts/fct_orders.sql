@@ -33,7 +33,7 @@ items_rollup as (
         order_id,
         count(*) as item_count,
         sum(revenue_usd) as items_rollup_total_usd
-    from {{ ref('fct_order_items') }}
+    from {{ ref('int_order_items_enriched') }}
     group by order_id
 )
 

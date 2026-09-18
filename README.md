@@ -143,9 +143,9 @@ flowchart LR
     stg_customers --> dim_customers
     stg_products --> dim_products
     int_order_items_enriched --> fct_order_items
+    int_order_items_enriched --> fct_orders
     stg_orders --> fct_orders
     int_fx_usd --> fct_orders
-    fct_order_items --> fct_orders
     fct_order_items --> rpt_product_performance
     dim_products --> rpt_product_performance
     fct_orders --> rpt_promo_timing
