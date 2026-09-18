@@ -8,3 +8,7 @@ warehouse.duckdb.wal
 __pycache__/
 .env
 .venv/
+target/
+dbt_packages/
+logs/
+.user.yml
