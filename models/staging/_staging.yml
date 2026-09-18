@@ -37,3 +37,18 @@ models:
       - name: rate_date
         data_tests:
           - not_null
+
+  - name: dq_exceptions
+    columns:
+      - name: source_table
+        data_tests:
+          - not_null
+      - name: record_id
+        data_tests:
+          - not_null
+      - name: dq_reason
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['invalid_currency_code', 'orphan_product_id']
