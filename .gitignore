@@ -2,6 +2,8 @@ data/raw/
 data/
 *.csv
 *.parquet
+warehouse.duckdb
+warehouse.duckdb.wal
 .ipynb_checkpoints/
 __pycache__/
 .env
