@@ -21,3 +21,13 @@ models:
           - accepted_values:
               arguments:
                 values: ['direct', 'inverted', 'forward_filled']
+
+  - name: int_order_items_enriched
+    columns:
+      - name: order_item_id
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        data_tests:
+          - not_null
