@@ -45,3 +45,17 @@ models:
               arguments:
                 to: ref('dim_customers')
                 field: customer_id
+
+  - name: rpt_product_performance
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: rpt_promo_timing
+    columns:
+      - name: order_hour
+        data_tests:
+          - unique
+          - not_null

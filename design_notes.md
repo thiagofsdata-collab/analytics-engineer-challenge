@@ -25,3 +25,13 @@ Source: `notebooks/01_eda.ipynb`. `[§N]` points to the matching numbered sectio
 - products.json: 100 ids (1-100), no gaps, no duplicates, currency always USD. `[§15]`
 - Forward-fill sensitivity: top 10 by revenue shifts 2 positions when pre-June orders are included
   (ids 75, 78 in; ids 8, 15 out). `[§16]`
+
+## Business marts
+
+- `rpt_product_performance`: quantity counts every real-product line item regardless of currency (units sold
+  don't need FX); revenue only sums where `revenue_usd` is convertible. Excludes `product_id = -1` (Unknown)
+  from both rankings — without that, Unknown's 174 units would outrank every real product (top real product
+  is 40 units). Initial version filtered quantity by currency too, dropping 195/988 units (19.7%) for no reason
+  tied to volume. Unknown's volume/revenue stays visible in the coverage panel of `02_business_answers.ipynb`.
+- `rpt_promo_timing`: peak order count is 15:00 (72 orders); peak revenue is 14:00 (~$15.9k) — the busiest
+  hour is not the most profitable one. Orders only occur 9:00-18:00; no activity outside that window.
