@@ -3,3 +3,7 @@ dbt-duckdb
 nbformat
 nbclient
 ipykernel
+plotly
+kaleido
+pandas
+numpy
