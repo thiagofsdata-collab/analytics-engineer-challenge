@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: int_fx_usd
+    columns:
+      - name: rate_date
+        data_tests:
+          - not_null
+      - name: currency
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['USD', 'EUR', 'GBP']
+      - name: rate_to_usd
+        data_tests:
+          - not_null
+      - name: fx_rate_source
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['direct', 'inverted', 'forward_filled']
