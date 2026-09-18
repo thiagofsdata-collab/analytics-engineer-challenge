@@ -21,11 +21,13 @@ order_items_invalid_currency as (
 order_items_orphan_product as (
     select
         'order_items' as source_table,
-        order_item_id::varchar as record_id,
+        order_items.order_item_id::varchar as record_id,
         'orphan_product_id' as dq_reason,
-        product_id::varchar as dq_detail
-    from {{ ref('stg_order_items') }}
-    where is_product_id_orphan
+        order_items.product_id::varchar as dq_detail
+    from {{ ref('stg_order_items') }} as order_items
+    left join {{ ref('stg_products') }} as products
+        on order_items.product_id = products.product_id
+    where products.product_id is null
 ),
 
 unioned as (

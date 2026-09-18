@@ -6,8 +6,7 @@ with order_items as (
         quantity,
         unit_price,
         currency as item_currency,
-        is_valid_currency_code,
-        is_product_id_orphan
+        is_valid_currency_code
     from {{ ref('stg_order_items') }}
 ),
 
@@ -17,6 +16,10 @@ orders as (
         order_date,
         currency as order_currency
     from {{ ref('stg_orders') }}
+),
+
+products as (
+    select product_id from {{ ref('stg_products') }}
 ),
 
 fx as (
@@ -37,13 +40,14 @@ joined as (
         order_items.unit_price,
         order_items.item_currency,
         order_items.is_valid_currency_code,
-        order_items.is_product_id_orphan,
+        products.product_id is null as is_product_id_orphan,
         orders.order_date,
         orders.order_currency,
         fx.rate_to_usd,
         fx.fx_rate_source
     from order_items
     left join orders on order_items.order_id = orders.order_id
+    left join products on order_items.product_id = products.product_id
     left join fx
         on orders.order_date::date = fx.rate_date
         and order_items.item_currency = fx.currency
